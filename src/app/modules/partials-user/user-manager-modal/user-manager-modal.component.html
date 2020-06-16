@@ -1,0 +1,119 @@
+<!-- Start client data bonding modal -->
+<app-modal-layout #modalLayout [title]="(user._id ? 'Editar' : 'Crear') + ' Usuario'">
+  <!-- Start body reference -->
+  <ng-template #bodyContent>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="">Nombres*</label>
+                  <input class="form-control" placeholder="Catalina..." formControlName="name">
+                  <app-control-message-input [control]="form.controls.name"
+                    [configMessages]="controlField?.messages?.name"></app-control-message-input>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="">Apellidos*</label>
+                  <input class="form-control" placeholder="Valencia..." formControlName="lastname">
+                  <app-control-message-input [control]="form.controls.lastname"
+                    [configMessages]="controlField?.messages?.lastname"></app-control-message-input>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="">Correo electrónico*</label>
+                  <input class="form-control" placeholder="example@gmail.com..." formControlName="email"
+                    (keyup)="cleanEmail($event)">
+                  <app-control-message-input [control]="form.controls.email"
+                    [configMessages]="controlField?.messages?.email"></app-control-message-input>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group notMb">
+                  <label for="">Sexo*</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" formControlName="sex" [value]="0" id="customRadio1" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio1">M</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" formControlName="sex" [value]="1" id="customRadio2" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio2">F</label>
+                </div>
+              </div>
+              <div class="col-12 mt-2">
+                <div class="form-group">
+                  <label for="">Contraseña*</label>
+                  <input class="form-control" placeholder="******..." formControlName="password" name="password"
+                    type="password">
+                  <app-control-message-input [control]="form.controls.password"
+                    [configMessages]="controlField?.messages?.password"></app-control-message-input>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="">Teléfono*</label>
+                  <input class="form-control" placeholder="1234567..." formControlName="phone">
+                  <app-control-message-input [control]="form.controls.phone"
+                    [configMessages]="controlField?.messages?.phone"></app-control-message-input>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="">Tipo de teléfono*</label>
+                  <select class="form-control" formControlName="phoneTypeId">
+                    <option *ngFor="let record of phoneTypeList;" [value]="record._id">{{ record.name }}</option>
+                  </select>
+                  <app-control-message-input [control]="form.controls.phoneTypeId"
+                    [configMessages]="controlField?.messages?.phoneTypeId"></app-control-message-input>
+                </div>
+              </div>
+              <ng-container *ngIf="user._id">
+                <div class="col-12">
+                  <hr>
+                </div>
+                <div class="col-12 col-sm-6">
+                  <div class="form-group">
+                    <label for="">Creado:</label>
+                    {{ user.created | date:'MMMM d, y, h:mm a' }}
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                  <div class="form-group">
+                    <label for="">Actualizado:</label>
+                    {{ user.updated | date:'MMMM d, y, h:mm a' | defaultText }}
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <!-- End body reference -->
+
+  <!-- Start footer reference -->
+  <ng-template #footerContent>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <form class="text-center" (ngSubmit)="onSubmit()" [formGroup]="form" novalidate>
+            <button type="button" class="btn btn-default mr-3" (click)="closeModal()"
+              [disabled]="loader">Cancelar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid || loader">{{ user._id ? 'Editar' : 'Crear' }}</button>
+          </form>
+        </div>
+        <div class="col-12 my-3" *ngIf="loader">
+          <app-simple-loader></app-simple-loader>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <!-- End footer reference -->
+</app-modal-layout>
+<!-- End client data bonding modal -->

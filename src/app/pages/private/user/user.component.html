@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row my-3" *ngIf="loader">
+    <div class="col-12">
+      <app-simple-loader></app-simple-loader>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12">
+      <h1 class="display-4"><span class="fa fa-users text-primary"></span> Listado de usuarios</h1>
+      <p class="lead">En esta sección podras administrar los usuarios registrados en la plataforma, con la opción de crear, editar y eliminar registros.</p>
+      <hr class="my-4">
+      <div class="alert alert-primary" role="alert">
+        <span class="fa fa-info-circle"></span> Nota: No podrás administrar tu propio usuario.
+      </div>
+      <button class="btn btn-outline-primary" (click)="openManage({})" tooltip="Crear"><span class="fa fa-plus-circle"></span> Crear</button>
+    </div>
+  </div>
+
+  <!-- Start table-->
+  <div class="row my-3">
+    <div class="col-12">
+      <div class="card">        
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Correo electrónico</th>
+              <th scope="col">Creado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let record of recordList | paginate: { itemsPerPage: pagination.limit, currentPage: pagination.page, totalItems: pagination.total }">
+              <tr>
+                <th scope="col">{{ record.name | defaultText }}</th>
+                <td>{{ record.lastname | defaultText }}</td>
+                <td>{{ record.email | defaultText }}</td>
+                <td>{{ record.created | date:'MMMM d, y, h:mm a' | defaultText }}</td>
+                <td>
+                  <button class="btn btn-outline-secondary mx-1" tooltip="Editar" (click)="openManage(record)"><span class="fa fa-pencil"></span></button>
+                  <button class="btn btn-outline-danger mx-1" tooltip="Eliminar" (click)="openDelete(record)"><span class="fa fa-trash"></span></button>
+                </td>
+              </tr>
+            </ng-container>
+
+          </tbody>
+        </table>
+        <ng-container *ngIf="!loader && recordList.length === 0">
+          <div class="row">
+            <div class="col-12 mx-3">
+              <h5>Sin usuarios encontrados.</h5>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <!-- End table-->
+
+  <!-- Start pagination -->
+  <div class="row my-3" *ngIf="recordList.length > 0">
+    <div class="col-12">
+      <pagination-controls class="" autoHide="true" maxSize="7" (pageChange)="pageChange($event)"></pagination-controls>
+    </div>
+  </div>
+  <!-- End pagination -->
+
+</div>
+

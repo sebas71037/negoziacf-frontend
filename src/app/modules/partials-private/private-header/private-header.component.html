@@ -1,0 +1,20 @@
+<nav id="private-header" class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" [routerLink]="['/']">
+    <!--img src="./assets/images/logo/logo.svg" width="30" height="30" class="d-inline-block align-top mr-3" alt=""-->
+    <span class="fa fa-address-card-o mr-2" aria-hidden="true"></span>
+    {{ title }}
+  </a>
+  <div class="row">
+    <div class="col-12">
+      <div class="btn-group" dropdown>
+        <button id="button-menu" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+          aria-controls="dropdown-basic">
+          {{ completeName }} <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu fix-dropmenu-left" role="menu" aria-labelledby="button-menu">
+          <li role="menuitem"><a class="dropdown-item" (click)="closeSession()">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

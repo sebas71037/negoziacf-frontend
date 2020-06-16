@@ -1,0 +1,17 @@
+#content-page{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	vertical-align: top;
+	#content-section{
+		background-color: white;
+		overflow: hidden;
+		overflow-y: auto;
+		#container-target-section{
+			width: 100%;
+			vertical-align: top;
+			background-color: #fafafa;
+		}
+	}
+}
+	

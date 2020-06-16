@@ -1,0 +1,96 @@
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div class="col-12 h-100" [ngStyle]="{'background-image': 'url(./assets/img/bg-default.png)'  }">
+      <div class="container-register align-xy-abs">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="text-center">Registrarse</h1>
+          </div>
+          <div class="col-12 my-3">
+            <hr>
+          </div>
+          <div class="col-12">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="">Nombres*</label>
+                    <input class="form-control" placeholder="Catalina..." formControlName="name">
+                    <app-control-message-input [control]="form.controls.name"
+                      [configMessages]="controlField?.messages?.name"></app-control-message-input>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="">Apellidos*</label>
+                    <input class="form-control" placeholder="Valencia..." formControlName="lastname">
+                    <app-control-message-input [control]="form.controls.lastname"
+                      [configMessages]="controlField?.messages?.lastname"></app-control-message-input>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="">Correo electrónico*</label>
+                    <input class="form-control" placeholder="example@gmail.com..." formControlName="email"
+                      (keyup)="cleanEmail($event)">
+                    <app-control-message-input [control]="form.controls.email"
+                      [configMessages]="controlField?.messages?.email"></app-control-message-input>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group notMb">
+                    <label for="">Sexo*</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" formControlName="sex" [value]="0" id="customRadio1" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">M</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" formControlName="sex" [value]="1" id="customRadio2" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">F</label>
+                  </div>
+                </div>
+                <div class="col-12 mt-2">
+                  <div class="form-group">
+                    <label for="">Contraseña*</label>
+                    <input class="form-control" placeholder="******..." formControlName="password" name="password"
+                      type="password">
+                    <app-control-message-input [control]="form.controls.password"
+                      [configMessages]="controlField?.messages?.password"></app-control-message-input>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="">Teléfono*</label>
+                    <input class="form-control" placeholder="1234567..." formControlName="phone">
+                    <app-control-message-input [control]="form.controls.phone"
+                      [configMessages]="controlField?.messages?.phone"></app-control-message-input>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="">Tipo de teléfono*</label>
+                    <select class="form-control" formControlName="phoneTypeId">
+                      <option *ngFor="let record of phoneTypeList;" [value]="record._id">{{ record.name }}</option>
+                    </select>
+                    <app-control-message-input [control]="form.controls.phoneTypeId"
+                      [configMessages]="controlField?.messages?.phoneTypeId"></app-control-message-input>
+                  </div>
+                </div>
+                <div class="col-12 mt-2">
+                  <app-simple-loader *ngIf="loader"></app-simple-loader>
+                </div>
+                <div class="col-12 text-center">
+                  <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Registrarse</button>
+                </div>
+                <div class="col-12 text-center">
+                  <button [routerLink]="['/login']" type="button" class="btn btn-link">Ya tienes cuenta? Inicia sesión</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
