@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
-  backendUrl: 'http://localhost:3331/api',
-  socketUrl: 'http://localhost:3331',
+  backendUrl: 'https://negozia-backend.herokuapp.com/api',
+  socketUrl: 'https://negozia-backend.herokuapp.com',
   prefix: 'NEG-',
-  simulation: true,
+  simulation: false,
   simulationTime: 500,
 };
